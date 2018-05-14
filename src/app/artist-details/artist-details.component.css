@@ -1,0 +1,22 @@
+.details-container {
+	padding: 10px;
+}
+
+.artist-name {
+	font-size: 2.5em;
+}
+
+.artist-bio {
+	padding: 0px 10px;
+	line-height: 1.5em;
+}
+
+.artist-image {
+	float: left;
+	padding-right: 10px;
+}
+
+.back-button {
+	margin-top: 10px;
+	font-size: 1.2em;
+}

@@ -1,0 +1,12 @@
+<div class="details-container">
+  <div *ngIf="artist">
+    <div class="artist-name">
+      {{artist.name}}
+    </div>
+    <div class="artist-image">
+      <img src={{artist.imageUrl}} alt={{artist.name}} />
+    </div>
+    <div class="artist-bio" [innerHTML]=artist.bio></div>
+    <button class="back-button" routerLink="/list">Back</button>
+  </div>
+</div>

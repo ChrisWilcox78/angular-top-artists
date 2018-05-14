@@ -1,0 +1,20 @@
+.artist-summary-view {
+	display: inline-block;
+	cursor: pointer;
+	margin-right: 15px;
+	margin-bottom: 15px;
+}
+
+.artist-summary-view .chart-position {
+	font-size: 1.5em;
+	float: left;
+}
+
+.artist-summary-view .artist-name {
+	font-size: 1.5em;
+}
+
+.list-container {
+	text-align: center;
+	margin-top: 10px;
+}

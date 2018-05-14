@@ -1,0 +1,17 @@
+.header {
+    text-align: center;
+    background-color: #222;
+    color: whitesmoke;
+    padding-bottom: 15px;
+    padding-top: 50px;
+    height: 150px;
+}
+
+.title {
+    font-size: 3em;
+    padding-bottom: 50px;
+}
+
+* {
+    margin: 0px;
+}
