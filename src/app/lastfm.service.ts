@@ -3,14 +3,11 @@ import { HttpClient } from '@angular/common/http';
 import { DomSanitizer } from '@angular/platform-browser';
 
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
 
 import { ArtistSummary } from './artistSummary';
 import { ArtistDetails } from './artistDetails';
 import { Data } from '@angular/router';
-
-// TODO error handling
-
 
 @Injectable({
   providedIn: 'root'
@@ -30,7 +27,8 @@ export class LastfmService {
         format: "json"
       }
     }).pipe(
-      map(data => this._extractRelevantSummaryDetails(data.topartists.artist))
+      catchError(error => this.handleError(error, [])),
+      map(data => this._extractSummary(data.topartists.artist))
     );
   }
 
@@ -43,11 +41,18 @@ export class LastfmService {
         mbid: mbid
       }
     }).pipe(
-      map(data => this._extractRelevantArtistDetails(data))
+      catchError(error => this.handleError(error, undefined)),
+      map(data => this._extractDetails(data))
     );
   }
 
-  private _extractRelevantSummaryDetails(artistsArray): ArtistSummary[] {
+  /** A very basic error handler: just log the error and return some result to keep things going. */
+  private handleError<T>(error: any, errorResult: T): Observable<T> {
+    console.error(error);
+    return of(errorResult);
+  }
+
+  private _extractSummary(artistsArray): ArtistSummary[] {
     return artistsArray.map(rawArtist => {
       return {
         mbid: rawArtist.mbid,
@@ -57,7 +62,7 @@ export class LastfmService {
     });
   }
 
-  private _extractRelevantArtistDetails(data): ArtistDetails {
+  private _extractDetails(data): ArtistDetails {
     return {
       name: data.artist.name,
       imageUrl: data.artist.image[2]["#text"],
